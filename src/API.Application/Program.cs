@@ -1,10 +1,48 @@
 using CrossCutting.DependencyInjection;
+using Domain.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+ConfigureService.ConfigureDependenciesService(builder.Services);
+ConfigureRepository.ConfigureDependenciesRepository(builder.Services, builder.Configuration);
+
+var signingConfiguration = new SigningConfigurations();
+builder.Services.AddSingleton(signingConfiguration);
+
+var tokenConfigurations = new TokenConfigurations();
+new ConfigureFromConfigurationOptions<TokenConfigurations>(builder.Configuration.GetSection("TokenConfigurations")).Configure(tokenConfigurations);
+builder.Services.AddSingleton(tokenConfigurations);
+
+builder.Services.AddAuthentication(authOptions =>
+{
+    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(bearerOptions =>
+{
+    var paramsValidation = bearerOptions.TokenValidationParameters;
+    paramsValidation.IssuerSigningKey = signingConfiguration.Key;
+    paramsValidation.ValidAudience = tokenConfigurations.Audience;
+    paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
+    paramsValidation.ValidateIssuerSigningKey = true;
+    paramsValidation.ValidateLifetime = true;
+    paramsValidation.ClockSkew = TimeSpan.Zero;
+});
+
+builder.Services.AddAuthorization(auth =>
+{
+    auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+        .RequireAuthenticatedUser()
+        .Build());
+});
+
 builder.Services.AddSwaggerGen(cs =>
 {
     cs.SwaggerDoc("v1", new OpenApiInfo
@@ -24,14 +62,32 @@ builder.Services.AddSwaggerGen(cs =>
             Name = "Termo de Licença de uso",
         }
     });
-});
 
-ConfigureService.ConfigureDependenciesService(builder.Services);
-ConfigureRepository.ConfigureDependenciesRepository(builder.Services);
+    cs.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Entre com o Token JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    cs.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            }, new List<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

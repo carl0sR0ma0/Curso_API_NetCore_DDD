@@ -1,5 +1,6 @@
 ﻿using Domain.DTOs;
 using Domain.Interfaces.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -10,6 +11,7 @@ namespace Application.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost]
+        [AllowAnonymous]
         public async Task<object> Login([FromBody] LoginDTO loginDTO, [FromServices] ILoginService service)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);

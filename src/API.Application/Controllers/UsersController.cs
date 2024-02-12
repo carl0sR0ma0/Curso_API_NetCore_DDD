@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -17,6 +18,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
+        [Authorize("Bearer")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -33,6 +35,7 @@ namespace Application.Controllers
 
         [HttpGet]
         [Route("{id}", Name = "GetById")]
+        [Authorize("Bearer")]
         public async Task<IActionResult> GetById(Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -48,6 +51,7 @@ namespace Application.Controllers
         }
 
         [HttpPost]
+        [Authorize("Bearer")]
         public async Task<IActionResult> Post([FromBody] UserEntity user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -65,6 +69,7 @@ namespace Application.Controllers
         }
 
         [HttpPut]
+        [Authorize("Bearer")]
         public async Task<IActionResult> Put([FromBody] UserEntity user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -82,6 +87,7 @@ namespace Application.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("Bearer")]
         public async Task<IActionResult> Delete(Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
