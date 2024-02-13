@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System.Text.Json;
 
 namespace Data.Context
 {
@@ -7,10 +8,24 @@ namespace Data.Context
     {
         public MyContext CreateDbContext(string[] args)
         {
-            // Usado para Criar as Migrações
-            var connectionString = "Server=127.0.0.1;Port=5432;Pooling=false;Database=dbAPI;User Id=postgres;Password=pentabr0610;";
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "API.Environment", "DbSettings.json");
+
+            var jsonContent = File.ReadAllText(filePath);
+            var dbSettings = JsonSerializer.Deserialize<DbSettings>(jsonContent);
+
+            string? connectionString;
             var optionBuilder = new DbContextOptionsBuilder<MyContext>();
-            optionBuilder.UseNpgsql(connectionString);
+
+            if (dbSettings.DATABASE.ToLower().Equals("Postgres".ToLower()))
+            {
+                connectionString = dbSettings.DB_CONNECTION_PG;
+                optionBuilder.UseNpgsql(connectionString);
+            }
+            else
+            {
+                connectionString = dbSettings.DB_CONNECTION_SS;
+                optionBuilder.UseSqlServer(connectionString);
+            }
             return new MyContext(optionBuilder.Options);
         }
     }

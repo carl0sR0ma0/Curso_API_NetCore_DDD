@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "API.Application\Application.csproj", "{ECB247B9-A3E8-4FBA-AA24-9BCDB2AE2E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "API.Application\Application.csproj", "{ECB247B9-A3E8-4FBA-AA24-9BCDB2AE2E06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "API.Domain\Domain.csproj", "{61A10FBD-05AC-41AA-BC7E-D41B8FCE3861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "API.Domain\Domain.csproj", "{61A10FBD-05AC-41AA-BC7E-D41B8FCE3861}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossCutting", "API.CrossCutting\CrossCutting.csproj", "{28AE1B5E-BF0E-461D-B0C0-7D0073C9D0C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "API.CrossCutting\CrossCutting.csproj", "{28AE1B5E-BF0E-461D-B0C0-7D0073C9D0C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "API.Data\Data.csproj", "{EF10C7A9-50A5-449E-8ECC-2C9162108455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "API.Data\Data.csproj", "{EF10C7A9-50A5-449E-8ECC-2C9162108455}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "API.Service\Service.csproj", "{9391A3BE-B01B-4C96-87D4-FDDBF98A1E79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "API.Service\Service.csproj", "{9391A3BE-B01B-4C96-87D4-FDDBF98A1E79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Environment", "Environment", "{53EB966F-99BC-4426-8288-32B93219479E}"
+	ProjectSection(SolutionItems) = preProject
+		API.Environment\DbSettings.json = API.Environment\DbSettings.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ECB247B9-A3E8-4FBA-AA24-9BCDB2AE2E06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +44,11 @@ Global
 		{9391A3BE-B01B-4C96-87D4-FDDBF98A1E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9391A3BE-B01B-4C96-87D4-FDDBF98A1E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9391A3BE-B01B-4C96-87D4-FDDBF98A1E79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A04AA4D2-57F4-4A8C-9C6F-F9904D4AF932}
 	EndGlobalSection
 EndGlobal

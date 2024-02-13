@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 ConfigureService.ConfigureDependenciesService(builder.Services);
-ConfigureRepository.ConfigureDependenciesRepository(builder.Services, builder.Configuration);
+ConfigureRepository.ConfigureDependenciesRepository(builder.Services);
 
 ConfigureAuthentication.ConfigureDependenciesAuthentication(builder.Services, builder.Configuration);
 
