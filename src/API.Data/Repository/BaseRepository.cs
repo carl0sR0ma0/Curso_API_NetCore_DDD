@@ -88,7 +88,7 @@ namespace Data.Repository
                 var result = await _dataset.SingleOrDefaultAsync(e => e.Id.Equals(entity.Id));
                 if (result is null) return null;
 
-                entity.UpdateAt = DateTime.UtcNow;
+                entity.UpdateAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified);
                 entity.CreateAt = result.CreateAt;
 
                 _context.Entry(result).CurrentValues.SetValues(entity);
