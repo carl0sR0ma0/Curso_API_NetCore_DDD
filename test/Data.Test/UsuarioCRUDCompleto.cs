@@ -2,6 +2,7 @@
 using Data.Implementations;
 using Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
+using Faker;
 
 namespace Data.Test
 {
@@ -23,8 +24,8 @@ namespace Data.Test
                 UserImplementation _repository = new UserImplementation(context);
                 UserEntity _entity = new UserEntity
                 {
-                    Email = Faker.Internet.Email(),
-                    Name = Faker.Name.FullName()
+                    Email = Internet.Email(),
+                    Name = Name.FullName()
                 };
 
                 var _registerCreated = await _repository.InsertAsync(_entity);
@@ -33,7 +34,7 @@ namespace Data.Test
                 Assert.Equal(_entity.Name, _registerCreated.Name);
                 Assert.False(_registerCreated.Id == Guid.Empty);
 
-                _entity.Name = Faker.Name.First();
+                _entity.Name = Name.First();
                 var _registerUpdated = await _repository.UpdateAsync(_entity);
                 Assert.Equal(_entity.Email, _registerUpdated.Email);
                 Assert.Equal(_entity.Name, _registerUpdated.Name);
