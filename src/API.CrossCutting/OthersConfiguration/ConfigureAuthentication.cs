@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace CrossCutting.DependencyInjection
+namespace CrossCutting.OthersConfiguration
 {
     public class ConfigureAuthentication
     {

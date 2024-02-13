@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.User;
+using Domain.Entities;
 using Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,7 @@ namespace Application.Controllers
 
         [HttpPost]
         [Authorize("Bearer")]
-        public async Task<IActionResult> Post([FromBody] UserEntity user)
+        public async Task<IActionResult> Post([FromBody] UserCreateDTO user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -70,7 +71,7 @@ namespace Application.Controllers
 
         [HttpPut]
         [Authorize("Bearer")]
-        public async Task<IActionResult> Put([FromBody] UserEntity user)
+        public async Task<IActionResult> Put([FromBody] UserUpdateDTO user)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

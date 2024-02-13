@@ -1,13 +1,13 @@
-﻿using Domain.Entities;
+﻿using Domain.DTOs.User;
 
 namespace Domain.Interfaces.Services.User
 {
     public interface IUserService
     {
-        Task<UserEntity> Get(Guid id);
-        Task<IEnumerable<UserEntity>> GetAll();
-        Task<UserEntity> Post(UserEntity user);
-        Task<UserEntity> Put(UserEntity user);
+        Task<UserDTO> Get(Guid id);
+        Task<IEnumerable<UserDTO>> GetAll();
+        Task<UserCreateResultDTO> Post(UserCreateDTO user);
+        Task<UserUpdateResultDTO> Put(UserUpdateDTO user);
         Task<bool> Delete(Guid id);
     }
 }

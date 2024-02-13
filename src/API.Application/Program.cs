@@ -1,4 +1,5 @@
 using CrossCutting.DependencyInjection;
+using CrossCutting.OthersConfiguration;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ ConfigureService.ConfigureDependenciesService(builder.Services);
 ConfigureRepository.ConfigureDependenciesRepository(builder.Services, builder.Configuration);
 
 ConfigureAuthentication.ConfigureDependenciesAuthentication(builder.Services, builder.Configuration);
+
+ConfigureAutoMapper.ConfigureDependenciesAutoMapper(builder.Services);
 
 builder.Services.AddSwaggerGen(cs =>
 {
