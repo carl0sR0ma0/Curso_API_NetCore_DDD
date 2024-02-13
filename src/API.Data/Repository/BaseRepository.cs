@@ -38,8 +38,8 @@ namespace Data.Repository
             try
             {
                 if (entity.Id == Guid.Empty) entity.Id = Guid.NewGuid();
-
-                entity.CreateAt = DateTime.UtcNow;
+                
+                entity.CreateAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified);
                 _dataset.Add(entity);
 
                 await _context.SaveChangesAsync();
