@@ -1,4 +1,4 @@
-﻿namespace Data.Context
+﻿namespace Domain.Configuration
 {
     public class DbSettings
     {

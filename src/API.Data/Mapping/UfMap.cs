@@ -5,19 +5,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Mapping
 {
-    public class UserMap : IEntityTypeConfiguration<UserEntity>
+    public class UfMap : IEntityTypeConfiguration<UFEntity>
     {
-        public void Configure(EntityTypeBuilder<UserEntity> builder)
+        public void Configure(EntityTypeBuilder<UFEntity> builder)
         {
-            builder.ToTable("User");
+            builder.ToTable("UF");
 
             builder.HasKey(u => u.Id);
 
-            builder.HasIndex(u => u.Email).IsUnique();
-
-            builder.Property(u => u.Name).IsRequired().HasMaxLength(60);
-
-            builder.Property(u => u.Email).HasMaxLength(100);
+            builder.HasIndex(u => u.Sigla).IsUnique();
 
             if (Configuration.GetConfiguration().DATABASE.ToLower().Equals("Postgres".ToLower()))
             {
