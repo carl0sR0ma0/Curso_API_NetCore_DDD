@@ -8,3 +8,5 @@
 /test/Service.Test/bin/Debug/net8.0
 /test/Application.Test/obj
 /test/Application.Test/bin/Debug/net8.0
+/test/Integration.Test/obj
+/test/Integration.Test/bin/Debug/net8.0
