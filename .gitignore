@@ -10,3 +10,5 @@
 /test/Application.Test/bin/Debug/net8.0
 /test/Integration.Test/obj
 /test/Integration.Test/bin/Debug/net8.0
+test/Service.Test/bin/Debug/net8.0/CoverletSourceRootsMapping_Service.Test
+/test/Service.Test/bin/Debug/net8.0/CoverletSourceRootsMapping_Service.Test
