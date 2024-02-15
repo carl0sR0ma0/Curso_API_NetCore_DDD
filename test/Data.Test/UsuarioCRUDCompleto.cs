@@ -8,18 +8,18 @@ namespace Data.Test
 {
     public class UsuarioCRUDCompleto : BaseTest, IClassFixture<DbTeste>
     {
-        private ServiceProvider _serviceProriver;
+        private ServiceProvider _serviceProvider;
 
         public UsuarioCRUDCompleto(DbTeste dbTeste)
         {
-            _serviceProriver = dbTeste.ServiceProvider;
+            _serviceProvider = dbTeste.ServiceProvider;
         }
 
         [Fact(DisplayName = "CRUD Usuário")]
         [Trait("CRUD", "UserEntity")]
         public async Task ShouldCRUDUser()
         {
-            using (var context = _serviceProriver.GetService<MyContext>())
+            using (var context = _serviceProvider.GetService<MyContext>())
             {
                 UserImplementation _repository = new UserImplementation(context);
                 UserEntity _entity = new UserEntity
