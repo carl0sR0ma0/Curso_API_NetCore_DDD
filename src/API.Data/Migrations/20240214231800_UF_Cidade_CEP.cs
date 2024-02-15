@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UF_Cidade_CEP : Migration
+    public partial class UF_Cidade_ZipCode : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,8 +23,8 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Sigla = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
-                    Nome = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
+                    Intials = table.Column<string>(type: "character varying(2)", maxLength: 2, nullable: false),
+                    Name = table.Column<string>(type: "character varying(45)", maxLength: 45, nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -34,11 +34,11 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Municipio",
+                name: "County",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Nome = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
+                    Name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
                     CodeIBGE = table.Column<int>(type: "integer", nullable: false),
                     UFId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -46,9 +46,9 @@ namespace Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Municipio", x => x.Id);
+                    table.PrimaryKey("PK_County", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Municipio_UF_UFId",
+                        name: "FK_County_UF_UFId",
                         column: x => x.UFId,
                         principalTable: "UF",
                         principalColumn: "Id",
@@ -56,31 +56,31 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CEP",
+                name: "ZipCode",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Cep = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    Logradouro = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
-                    Numero = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    MunicipioId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ZipCode = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    PublicPlace = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
+                    Number = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    CountyId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdateAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CEP", x => x.Id);
+                    table.PrimaryKey("PK_ZipCode", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CEP_Municipio_MunicipioId",
-                        column: x => x.MunicipioId,
-                        principalTable: "Municipio",
+                        name: "FK_ZipCode_County_CountyId",
+                        column: x => x.CountyId,
+                        principalTable: "County",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "UF",
-                columns: new[] { "Id", "CreateAt", "Nome", "Sigla", "UpdateAt" },
+                columns: new[] { "Id", "CreateAt", "Name", "Intials", "UpdateAt" },
                 values: new object[,]
                 {
                     { new Guid("1109ab04-a3a5-476e-bdce-6c3e2c2badee"), new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3268), "Paraíba", "PB", null },
@@ -118,29 +118,29 @@ namespace Data.Migrations
                 values: new object[] { new Guid("31fa879f-c801-4be0-94d5-005b0a0a52fd"), new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3026), "user.adm@mfrinfo.com", "Administrator", new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3038) });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CEP_Cep",
-                table: "CEP",
-                column: "Cep");
+                name: "IX_ZipCode_ZipCode",
+                table: "ZipCode",
+                column: "ZipCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CEP_MunicipioId",
-                table: "CEP",
-                column: "MunicipioId");
+                name: "IX_ZipCode_CountyId",
+                table: "ZipCode",
+                column: "CountyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Municipio_CodeIBGE",
-                table: "Municipio",
+                name: "IX_County_CodeIBGE",
+                table: "County",
                 column: "CodeIBGE");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Municipio_UFId",
-                table: "Municipio",
+                name: "IX_County_UFId",
+                table: "County",
                 column: "UFId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UF_Sigla",
+                name: "IX_UF_Intials",
                 table: "UF",
-                column: "Sigla",
+                column: "Intials",
                 unique: true);
         }
 
@@ -148,10 +148,10 @@ namespace Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CEP");
+                name: "ZipCode");
 
             migrationBuilder.DropTable(
-                name: "Municipio");
+                name: "County");
 
             migrationBuilder.DropTable(
                 name: "UF");

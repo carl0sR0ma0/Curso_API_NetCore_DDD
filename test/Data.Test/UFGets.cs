@@ -25,22 +25,22 @@ namespace Data.Test
                 UFEntity _entity = new UFEntity()
                 {
                     Id = new Guid("e7e416de-477c-4fa3-a541-b5af5f35ccf6"),
-                    Sigla = "SP",
-                    Nome = "São Paulo"
+                    Initials = "SP",
+                    Name = "São Paulo"
                 };
 
-                var _registroExiste = await _repository.ExistAsync(_entity.Id);
-                Assert.True(_registroExiste);
+                var _existRegister = await _repository.ExistAsync(_entity.Id);
+                Assert.True(_existRegister);
 
-                var _registroSelecionado = await _repository.SelectAsync(_entity.Id);
-                Assert.NotNull(_registroSelecionado);
-                Assert.Equal(_entity.Sigla, _registroSelecionado.Sigla);
-                Assert.Equal(_entity.Nome, _registroSelecionado.Nome);
-                Assert.Equal(_entity.Id, _registroSelecionado.Id);
+                var _registerSelected = await _repository.SelectAsync(_entity.Id);
+                Assert.NotNull(_registerSelected);
+                Assert.Equal(_entity.Initials, _registerSelected.Initials);
+                Assert.Equal(_entity.Name, _registerSelected.Name);
+                Assert.Equal(_entity.Id, _registerSelected.Id);
 
-                var _todosRegistros = await _repository.SelectAsync();
-                Assert.NotNull(_todosRegistros);
-                Assert.True(_todosRegistros.Count() == 27);
+                var _allRegisters = await _repository.SelectAsync();
+                Assert.NotNull(_allRegisters);
+                Assert.True(_allRegisters.Count() == 27);
             }
         }
     }

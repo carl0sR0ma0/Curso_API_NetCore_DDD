@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.DTOs.Municipio
+namespace Domain.DTOs.County
 {
-    public class MunicipioUpdateDTO
+    public class CountyUpdateDTO
     {
         [Required(ErrorMessage = "Id é campo Obrigatório")]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Nome do município é campo Obrigatório")]
         [StringLength(60, ErrorMessage = "Nome do município deve ter máximo {1} caracteres.")]
-        public string Nome { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         [Range(0, int.MaxValue, ErrorMessage = "Código do IBGE inválido")]
         public int CodeIBGE { get; set; }

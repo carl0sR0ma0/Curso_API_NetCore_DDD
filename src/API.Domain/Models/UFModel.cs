@@ -2,20 +2,20 @@
 {
     public class UFModel : BaseModel
     {
-		private string _sigla;
+		private string? _initials;
 
-		public string Sigla
+		public string? Initials
 		{
-			get { return _sigla; }
-			set { _sigla = value; }
+			get { return _initials; }
+			set { _initials = value; }
 		}
 
-		private string _nome;
+		private string? _name;
 
-		public string Nome
+		public string? Name
 		{
-			get { return _nome; }
-			set { _nome = value; }
+			get { return _name; }
+			set { _name = value; }
 		}
 	}
 }

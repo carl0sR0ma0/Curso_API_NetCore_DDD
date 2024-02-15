@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Implementations
 {
-    public class MunicipioImplementation : BaseRepository<MunicipioEntity>, IMunicipioRepository
+    public class CountyImplementation : BaseRepository<CountyEntity>, ICountyRepository
     {
-        private DbSet<MunicipioEntity> _dataset;
+        private DbSet<CountyEntity> _dataset;
 
-        public MunicipioImplementation(MyContext context) : base(context)
+        public CountyImplementation(MyContext context) : base(context)
         {
-            _dataset = _context.Set<MunicipioEntity>();
+            _dataset = _context.Set<CountyEntity>();
         }
 
-        public async Task<MunicipioEntity?> GetCompleteByIBGE(int codIBGE)
+        public async Task<CountyEntity?> GetCompleteByIBGE(int codIBGE)
         {
             return await _dataset.Include(m => m.UF).FirstOrDefaultAsync(m => m.CodeIBGE.Equals(codIBGE));
         }
 
-        public async Task<MunicipioEntity?> GetCompleteById(Guid id)
+        public async Task<CountyEntity?> GetCompleteById(Guid id)
         {
             return await _dataset.Include(m => m.UF).FirstOrDefaultAsync(m => m.Id.Equals(id));
         }

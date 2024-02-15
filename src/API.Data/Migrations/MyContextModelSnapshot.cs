@@ -22,13 +22,13 @@ namespace Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.CepEntity", b =>
+            modelBuilder.Entity("Domain.Entities.ZipCodeEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Cep")
+                    b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
@@ -36,15 +36,15 @@ namespace Data.Migrations
                     b.Property<DateTime?>("CreateAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Logradouro")
+                    b.Property<string>("PublicPlace")
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("character varying(60)");
 
-                    b.Property<Guid>("MunicipioId")
+                    b.Property<Guid>("CountyId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Numero")
+                    b.Property<string>("Number")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
@@ -54,14 +54,14 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Cep");
+                    b.HasIndex("ZipCode");
 
-                    b.HasIndex("MunicipioId");
+                    b.HasIndex("CountyId");
 
-                    b.ToTable("CEP", (string)null);
+                    b.ToTable("ZipCode", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.MunicipioEntity", b =>
+            modelBuilder.Entity("Domain.Entities.CountyEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace Data.Migrations
                     b.Property<DateTime?>("CreateAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("character varying(60)");
@@ -90,7 +90,7 @@ namespace Data.Migrations
 
                     b.HasIndex("UFId");
 
-                    b.ToTable("Municipio", (string)null);
+                    b.ToTable("County", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UFEntity", b =>
@@ -102,12 +102,12 @@ namespace Data.Migrations
                     b.Property<DateTime?>("CreateAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("character varying(45)");
 
-                    b.Property<string>("Sigla")
+                    b.Property<string>("Intials")
                         .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("character varying(2)");
@@ -117,7 +117,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Sigla")
+                    b.HasIndex("Intials")
                         .IsUnique();
 
                     b.ToTable("UF", (string)null);
@@ -127,190 +127,190 @@ namespace Data.Migrations
                         {
                             Id = new Guid("22ffbd18-cdb9-45cc-97b0-51e97700bf71"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3243),
-                            Nome = "Acre",
-                            Sigla = "AC"
+                            Name = "Acre",
+                            Intials = "AC"
                         },
                         new
                         {
                             Id = new Guid("7cc33300-586e-4be8-9a4d-bd9f01ee9ad8"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3246),
-                            Nome = "Alagoas",
-                            Sigla = "AL"
+                            Name = "Alagoas",
+                            Intials = "AL"
                         },
                         new
                         {
                             Id = new Guid("cb9e6888-2094-45ee-bc44-37ced33c693a"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3248),
-                            Nome = "Amazonas",
-                            Sigla = "AM"
+                            Name = "Amazonas",
+                            Intials = "AM"
                         },
                         new
                         {
                             Id = new Guid("409b9043-88a4-4e86-9cca-ca1fb0d0d35b"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3249),
-                            Nome = "Amapá",
-                            Sigla = "AP"
+                            Name = "Amapá",
+                            Intials = "AP"
                         },
                         new
                         {
                             Id = new Guid("5abca453-d035-4766-a81b-9f73d683a54b"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3251),
-                            Nome = "Bahia",
-                            Sigla = "BA"
+                            Name = "Bahia",
+                            Intials = "BA"
                         },
                         new
                         {
                             Id = new Guid("5ff1b59e-11e7-414d-827e-609dc5f7e333"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3253),
-                            Nome = "Ceará",
-                            Sigla = "CE"
+                            Name = "Ceará",
+                            Intials = "CE"
                         },
                         new
                         {
                             Id = new Guid("bd08208b-bfca-47a4-9cd0-37e4e1fa5006"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3254),
-                            Nome = "Distrito Federal",
-                            Sigla = "DF"
+                            Name = "Distrito Federal",
+                            Intials = "DF"
                         },
                         new
                         {
                             Id = new Guid("c623f804-37d8-4a19-92c1-67fd162862e6"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3256),
-                            Nome = "Espírito Santo",
-                            Sigla = "ES"
+                            Name = "Espírito Santo",
+                            Intials = "ES"
                         },
                         new
                         {
                             Id = new Guid("837a64d3-c649-4172-a4e0-2b20d3c85224"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3258),
-                            Nome = "Goiás",
-                            Sigla = "GO"
+                            Name = "Goiás",
+                            Intials = "GO"
                         },
                         new
                         {
                             Id = new Guid("57a9e9f7-9aea-40fe-a783-65d4feb59fa8"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3259),
-                            Nome = "Maranhão",
-                            Sigla = "MA"
+                            Name = "Maranhão",
+                            Intials = "MA"
                         },
                         new
                         {
                             Id = new Guid("27f7a92b-1979-4e1c-be9d-cd3bb73552a8"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3261),
-                            Nome = "Minas Gerais",
-                            Sigla = "MG"
+                            Name = "Minas Gerais",
+                            Intials = "MG"
                         },
                         new
                         {
                             Id = new Guid("3739969c-fd8a-4411-9faa-3f718ca85e70"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3263),
-                            Nome = "Mato Grosso do Sul",
-                            Sigla = "MS"
+                            Name = "Mato Grosso do Sul",
+                            Intials = "MS"
                         },
                         new
                         {
                             Id = new Guid("29eec4d3-b061-427d-894f-7f0fecc7f65f"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3264),
-                            Nome = "Mato Grosso",
-                            Sigla = "MT"
+                            Name = "Mato Grosso",
+                            Intials = "MT"
                         },
                         new
                         {
                             Id = new Guid("8411e9bc-d3b2-4a9b-9d15-78633d64fc7c"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3266),
-                            Nome = "Pará",
-                            Sigla = "PA"
+                            Name = "Pará",
+                            Intials = "PA"
                         },
                         new
                         {
                             Id = new Guid("1109ab04-a3a5-476e-bdce-6c3e2c2badee"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3268),
-                            Nome = "Paraíba",
-                            Sigla = "PB"
+                            Name = "Paraíba",
+                            Intials = "PB"
                         },
                         new
                         {
                             Id = new Guid("ad5969bd-82dc-4e23-ace2-d8495935dd2e"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3269),
-                            Nome = "Pernambuco",
-                            Sigla = "PE"
+                            Name = "Pernambuco",
+                            Intials = "PE"
                         },
                         new
                         {
                             Id = new Guid("f85a6cd0-2237-46b1-a103-d3494ab27774"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3271),
-                            Nome = "Piauí",
-                            Sigla = "PI"
+                            Name = "Piauí",
+                            Intials = "PI"
                         },
                         new
                         {
                             Id = new Guid("1dd25850-6270-48f8-8b77-2f0f079480ab"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3273),
-                            Nome = "Paraná",
-                            Sigla = "PR"
+                            Name = "Paraná",
+                            Intials = "PR"
                         },
                         new
                         {
                             Id = new Guid("43a0f783-a042-4c46-8688-5dd4489d2ec7"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3274),
-                            Nome = "Rio de Janeiro",
-                            Sigla = "RJ"
+                            Name = "Rio de Janeiro",
+                            Intials = "RJ"
                         },
                         new
                         {
                             Id = new Guid("542668d1-50ba-4fca-bbc3-4b27af108ea3"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3276),
-                            Nome = "Rio Grande do Norte",
-                            Sigla = "RN"
+                            Name = "Rio Grande do Norte",
+                            Intials = "RN"
                         },
                         new
                         {
                             Id = new Guid("924e7250-7d39-4e8b-86bf-a8578cbf4002"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3278),
-                            Nome = "Rondônia",
-                            Sigla = "RO"
+                            Name = "Rondônia",
+                            Intials = "RO"
                         },
                         new
                         {
                             Id = new Guid("9fd3c97a-dc68-4af5-bc65-694cca0f2869"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3279),
-                            Nome = "Roraima",
-                            Sigla = "RR"
+                            Name = "Roraima",
+                            Intials = "RR"
                         },
                         new
                         {
                             Id = new Guid("88970a32-3a2a-4a95-8a18-2087b65f59d1"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3281),
-                            Nome = "Rio Grande do Sul",
-                            Sigla = "RS"
+                            Name = "Rio Grande do Sul",
+                            Intials = "RS"
                         },
                         new
                         {
                             Id = new Guid("b81f95e0-f226-4afd-9763-290001637ed4"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3283),
-                            Nome = "Santa Catarina",
-                            Sigla = "SC"
+                            Name = "Santa Catarina",
+                            Intials = "SC"
                         },
                         new
                         {
                             Id = new Guid("fe8ca516-034f-4249-bc5a-31c85ef220ea"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3287),
-                            Nome = "Sergipe",
-                            Sigla = "SE"
+                            Name = "Sergipe",
+                            Intials = "SE"
                         },
                         new
                         {
                             Id = new Guid("e7e416de-477c-4fa3-a541-b5af5f35ccf6"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3288),
-                            Nome = "São Paulo",
-                            Sigla = "SP"
+                            Name = "São Paulo",
+                            Intials = "SP"
                         },
                         new
                         {
                             Id = new Guid("971dcb34-86ea-4f92-989d-064f749e23c9"),
                             CreateAt = new DateTime(2024, 2, 14, 20, 17, 59, 803, DateTimeKind.Local).AddTicks(3290),
-                            Nome = "Tocantins",
-                            Sigla = "TO"
+                            Name = "Tocantins",
+                            Intials = "TO"
                         });
                 });
 
@@ -354,21 +354,21 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.CepEntity", b =>
+            modelBuilder.Entity("Domain.Entities.ZipCodeEntity", b =>
                 {
-                    b.HasOne("Domain.Entities.MunicipioEntity", "Municipio")
-                        .WithMany("Ceps")
-                        .HasForeignKey("MunicipioId")
+                    b.HasOne("Domain.Entities.CountyEntity", "County")
+                        .WithMany("ZipCodes")
+                        .HasForeignKey("CountyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Municipio");
+                    b.Navigation("County");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MunicipioEntity", b =>
+            modelBuilder.Entity("Domain.Entities.CountyEntity", b =>
                 {
                     b.HasOne("Domain.Entities.UFEntity", "UF")
-                        .WithMany("Municipios")
+                        .WithMany("Countys")
                         .HasForeignKey("UFId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -376,14 +376,14 @@ namespace Data.Migrations
                     b.Navigation("UF");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MunicipioEntity", b =>
+            modelBuilder.Entity("Domain.Entities.CountyEntity", b =>
                 {
-                    b.Navigation("Ceps");
+                    b.Navigation("ZipCodes");
                 });
 
             modelBuilder.Entity("Domain.Entities.UFEntity", b =>
                 {
-                    b.Navigation("Municipios");
+                    b.Navigation("Countys");
                 });
 #pragma warning restore 612, 618
         }

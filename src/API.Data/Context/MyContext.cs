@@ -11,8 +11,8 @@ namespace Data.Context
 
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<UFEntity> UF { get; set; }
-        public DbSet<MunicipioEntity> Municipios { get; set; }
-        public DbSet<CepEntity> Ceps { get; set; }
+        public DbSet<CountyEntity> Counties { get; set; }
+        public DbSet<ZipCodeEntity> ZipsCode { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,8 +20,8 @@ namespace Data.Context
 
             modelBuilder.Entity<UserEntity>(new UserMap().Configure);
             modelBuilder.Entity<UFEntity>(new UfMap().Configure);
-            modelBuilder.Entity<MunicipioEntity>(new MunicipioMap().Configure);
-            modelBuilder.Entity<CepEntity>(new CepMap().Configure);
+            modelBuilder.Entity<CountyEntity>(new CountyMap().Configure);
+            modelBuilder.Entity<ZipCodeEntity>(new ZipCodeMap().Configure);
 
             modelBuilder.Entity<UserEntity>().HasData(new UserEntity
             {

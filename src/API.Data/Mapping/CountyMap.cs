@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Data.Mapping
 {
-    public class MunicipioMap : IEntityTypeConfiguration<MunicipioEntity>
+    public class CountyMap : IEntityTypeConfiguration<CountyEntity>
     {
-        public void Configure(EntityTypeBuilder<MunicipioEntity> builder)
+        public void Configure(EntityTypeBuilder<CountyEntity> builder)
         {
-            builder.ToTable("Municipio");
+            builder.ToTable("County");
 
             builder.HasKey(m => m.Id);
 
             builder.HasIndex(m => m.CodeIBGE);
 
-            builder.HasOne(m => m.UF).WithMany(u => u.Municipios);
+            builder.HasOne(m => m.UF).WithMany(u => u.Counties);
 
             if (Configuration.GetConfiguration().DATABASE.ToLower().Equals("Postgres".ToLower()))
             {

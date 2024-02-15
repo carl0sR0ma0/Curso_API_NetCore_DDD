@@ -13,7 +13,7 @@ namespace Data.Mapping
 
             builder.HasKey(u => u.Id);
 
-            builder.HasIndex(u => u.Sigla).IsUnique();
+            builder.HasIndex(u => u.Initials).IsUnique();
 
             if (Configuration.GetConfiguration().DATABASE.ToLower().Equals("Postgres".ToLower()))
             {
