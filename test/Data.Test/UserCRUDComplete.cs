@@ -6,11 +6,11 @@ using Faker;
 
 namespace Data.Test
 {
-    public class UsuarioCRUDCompleto : BaseTest, IClassFixture<DbTeste>
+    public class UserCRUDComplete : BaseTest, IClassFixture<DbTeste>
     {
         private ServiceProvider _serviceProvider;
 
-        public UsuarioCRUDCompleto(DbTeste dbTeste)
+        public UserCRUDComplete(DbTeste dbTeste)
         {
             _serviceProvider = dbTeste.ServiceProvider;
         }
