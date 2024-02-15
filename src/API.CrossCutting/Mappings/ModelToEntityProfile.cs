@@ -9,6 +9,12 @@ namespace CrossCutting.Mappings
         public ModelToEntityProfile()
         {
             CreateMap<UserModel, UserEntity>().ReverseMap();
+
+            CreateMap<UFModel, UFEntity>().ReverseMap();
+
+            CreateMap<CountyModel, CountyEntity>().ReverseMap();
+
+            CreateMap<ZipCodeModel, ZipCodeEntity>().ReverseMap();
         }
     }
 }

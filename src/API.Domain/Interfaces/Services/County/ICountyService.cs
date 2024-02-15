@@ -7,9 +7,9 @@ namespace Domain.Interfaces.Services.County
         Task<CountyDTO> Get(Guid id);
         Task<CountyCompleteDTO> GetCompleteById(Guid id);
         Task<CountyCompleteDTO> GetCompleteByIBGE(int codIBGE);
-        Task<IEnumerable<CountyCompleteDTO>> GetAll();
-        Task<CountyCreateResultDTO> Post(CountyCreateDTO municipio);
-        Task<CountyUpdateResultDTO> Put(CountyUpdateDTO municipio);
+        Task<IEnumerable<CountyDTO>> GetAll();
+        Task<CountyCreateResultDTO> Post(CountyCreateDTO county);
+        Task<CountyUpdateResultDTO> Put(CountyUpdateDTO county);
         Task<bool> Delete(Guid id);
     }
 }
