@@ -21,6 +21,7 @@ SQL Server
 Para acessar ao projeto basta acessar a pasta -> src
 
 🛠️ Abrir e rodar o projeto
+
 Abrir o arquivo API.sln no Visual Studio 2022
 E clicar no botão verde de executar
 
