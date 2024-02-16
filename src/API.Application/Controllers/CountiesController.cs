@@ -76,7 +76,7 @@ namespace Application.Controllers
         [HttpGet]
         [Route("{codeIBGE}", Name = "GetCountyWithCodeIBGE")]
         [Authorize("Bearer")]
-        public async Task<IActionResult> Get(int codeIBGE)
+        public async Task<IActionResult> GetCompleteByIBGE(int codeIBGE)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
