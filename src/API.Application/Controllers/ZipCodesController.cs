@@ -1,5 +1,5 @@
-﻿using Domain.DTOs.User;
-using Domain.Interfaces.Services.User;
+﻿using Domain.DTOs.ZipCode;
+using Domain.Interfaces.Services.ZipCode;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,41 +8,48 @@ namespace Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class ZipCodesController : ControllerBase
     {
-        private IUserService _service;
+        public IZipCodeService _service { get; set; }
 
-        public UsersController(IUserService service)
+        public ZipCodesController(IZipCodeService service)
         {
             _service = service;
         }
 
         [HttpGet]
+        [Route("{id}", Name = "GetZipCodeWithId")]
         [Authorize("Bearer")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                return Ok(await _service.GetAll());
+                var result = await _service.Get(id);
+                if (result == null) return NotFound();
+
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
-
+        
         [HttpGet]
-        [Route("{id}", Name = "GetById")]
+        [Route("byZipCode/{zipCode}", Name = "GetZipCodeWithZipCode")]
         [Authorize("Bearer")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> Get(string zipCode)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                return Ok(await _service.Get(id));
+                var result = await _service.Get(zipCode);
+                if (result == null) return NotFound();
+
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -51,15 +58,15 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody] UserCreateDTO user)
+        [Authorize("Bearer")]
+        public async Task<IActionResult> Post([FromBody] ZipCodeCreateDTO dtoCreate)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Post(user);
-                if (result is not null) return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
+                var result = await _service.Post(dtoCreate);
+                if (result is not null) return Created(new Uri(Url.Link("GetZipCodeWithId", new { id = result.Id })), result);
                 else return BadRequest();
             }
             catch (ArgumentException e)
@@ -70,13 +77,13 @@ namespace Application.Controllers
 
         [HttpPut]
         [Authorize("Bearer")]
-        public async Task<IActionResult> Put([FromBody] UserUpdateDTO user)
+        public async Task<IActionResult> Put([FromBody] ZipCodeUpdateDTO dtoUpdate)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Put(user);
+                var result = await _service.Put(dtoUpdate);
                 if (result is not null) return Ok(result);
                 else return BadRequest();
             }

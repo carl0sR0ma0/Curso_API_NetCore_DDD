@@ -19,7 +19,16 @@ namespace Service.Test.ZipCode
             var _result = await _service.Get(IdZipCode);
             Assert.NotNull(_result);
             Assert.True(_result.Id == IdZipCode);
-            Assert.Equal(ZipCodeUpdated, _result.ZipCode);
+            Assert.Equal(ZipCodeOrigin, _result.ZipCode);
+            Assert.Equal(PublicPlaceOrigin, _result.PublicPlace);
+
+            _serviceMock = new Mock<IZipCodeService>();
+            _serviceMock.Setup(m => m.Get(ZipCodeOrigin)).ReturnsAsync(zipCodeDTO);
+            _service = _serviceMock.Object;
+            
+            Assert.NotNull(_result);
+            Assert.True(_result.Id == IdZipCode);
+            Assert.Equal(ZipCodeOrigin, _result.ZipCode);
             Assert.Equal(PublicPlaceOrigin, _result.PublicPlace);
 
             _serviceMock = new Mock<IZipCodeService>();
@@ -27,7 +36,7 @@ namespace Service.Test.ZipCode
             _service = _serviceMock.Object;
 
             var _record = await _service.Get(Guid.NewGuid());
-            Assert.NotNull(_record);
+            Assert.Null(_record);
         }
     }
 }

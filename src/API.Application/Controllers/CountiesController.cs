@@ -1,5 +1,5 @@
-﻿using Domain.DTOs.User;
-using Domain.Interfaces.Services.User;
+﻿using Domain.DTOs.County;
+using Domain.Interfaces.Services.County;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -8,11 +8,11 @@ namespace Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class CountiesController : ControllerBase
     {
-        private IUserService _service;
+        public ICountyService _service { get; set; }
 
-        public UsersController(IUserService service)
+        public CountiesController(ICountyService service)
         {
             _service = service;
         }
@@ -34,15 +34,58 @@ namespace Application.Controllers
         }
 
         [HttpGet]
-        [Route("{id}", Name = "GetById")]
+        [Route("{id}", Name = "GetCountyWithId")]
         [Authorize("Bearer")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                return Ok(await _service.Get(id));
+                var result = await _service.Get(id);
+                if (result == null) return NotFound();
+
+                return Ok(result);
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id}", Name = "GetCountyCompleteWithId")]
+        [Authorize("Bearer")]
+        public async Task<IActionResult> GetCompleteById(Guid id)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            try
+            {
+                var result = await _service.GetCompleteById(id);
+                if (result == null) return NotFound();
+
+                return Ok(result);
+            }
+            catch (ArgumentException e)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        
+        [HttpGet]
+        [Route("{codeIBGE}", Name = "GetCountyWithCodeIBGE")]
+        [Authorize("Bearer")]
+        public async Task<IActionResult> Get(int codeIBGE)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            try
+            {
+                var result = await _service.GetCompleteByIBGE(codeIBGE);
+                if (result == null) return NotFound();
+
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -51,15 +94,15 @@ namespace Application.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Post([FromBody] UserCreateDTO user)
+        [Authorize("Bearer")]
+        public async Task<IActionResult> Post([FromBody] CountyCreateDTO dtoCreate)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Post(user);
-                if (result is not null) return Created(new Uri(Url.Link("GetById", new { id = result.Id })), result);
+                var result = await _service.Post(dtoCreate);
+                if (result is not null) return Created(new Uri(Url.Link("GetCountyCompleteWithId", new { id = result.Id })), result);
                 else return BadRequest();
             }
             catch (ArgumentException e)
@@ -70,13 +113,13 @@ namespace Application.Controllers
 
         [HttpPut]
         [Authorize("Bearer")]
-        public async Task<IActionResult> Put([FromBody] UserUpdateDTO user)
+        public async Task<IActionResult> Put([FromBody] CountyUpdateDTO dtoUpdate)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             try
             {
-                var result = await _service.Put(user);
+                var result = await _service.Put(dtoUpdate);
                 if (result is not null) return Ok(result);
                 else return BadRequest();
             }

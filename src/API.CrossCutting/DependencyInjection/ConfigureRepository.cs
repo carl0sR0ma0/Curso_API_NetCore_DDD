@@ -16,6 +16,10 @@ namespace CrossCutting.DependencyInjection
             serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddScoped<IUserRepository, UserImplementation>();
 
+            serviceCollection.AddScoped<ICountyRepository, CountyImplementation>();
+            serviceCollection.AddScoped<IUFRepository, UFImplementation>();
+            serviceCollection.AddScoped<IZipCodeRepository, ZipCodeImplementation>();
+
             var configurationBuilder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), ".."))
                 .AddJsonFile("API.Environment/DbSettings.json", optional: false, reloadOnChange: true);
