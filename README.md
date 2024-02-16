@@ -10,12 +10,14 @@ API .NET em DDD
 ***
 
 ✔️ Técnicas e tecnologias utilizadas
+
 .NET Core 8
 Entity Framework
 PostgresSQL
 SQL Server
 
 📁 Acesso ao projeto
+
 Para acessar ao projeto basta acessar a pasta -> src
 
 🛠️ Abrir e rodar o projeto
