@@ -1,7 +1,7 @@
 Curso NET Core 3.1/5.0/6.0 C# API - Arquitetura DDD
-Criando uma projeto de API em .NET C# utilizando a arquitetura Domain Driven Design
 
-Thumbnail GitHub
+Criando uma projeto de API em .NET C# utilizando a arquitetura Domain Driven Design
+***
 
 API .NET em DDD
 ***
